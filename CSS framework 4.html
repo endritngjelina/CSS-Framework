@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusCSS - Advanced Utility-First CSS Framework</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====================================== */
+        /* NEXUS CSS FRAMEWORK - CORE SYSTEM     */
+        /* ====================================== */
+        :root {/* CSS Custom Properties System */
+            --primary-50: #eff6ff;/* Color System */
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+            --secondary-50: #f8fafc;
+            --secondary-100: #f1f5f9;
+            --secondary-200: #e2e8f0;
+            --secondary-300: #cbd5e1;
+            --secondary-400: #94a3b8;
+            --secondary-500: #64748b;
+            --secondary-600: #475569;
+            --secondary-700: #334155;
+            --secondary-800: #1e293b;
+            --secondary-900: #0f172a;
+            --success-500: #10b981;
+            --warning-500: #f59e0b;
+            --error-500: #ef4444;
+            --space-1: 0.25rem;/* Spacing System */
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+            --space-32: 8rem;
+            --font-xs: 0.75rem;/* Typography System */
+            --font-sm: 0.875rem;
+            --font-base: 1rem;
+            --font-lg: 1.125rem;
+            --font-xl: 1.25rem;
+            --font-2xl: 1.5rem;
+            --font-3xl: 1.875rem;
+            --font-4xl: 2.25rem;
+            --font-5xl: 3rem;
+            --font-6xl: 3.75rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);/* Shadows */
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --border-radius-sm: 0.125rem;/* Borders */
+            --border-radius-md: 0.375rem;
+            --border-radius-lg: 0.5rem;
+            --border-radius-xl: 0.75rem;
+            --border-radius-2xl: 1rem;
+            --border-radius-3xl: 1.5rem;
+            --border-radius-full: 9999px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);/* Transitions */
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* ====================================== */
+        /* RESET & BASE STYLES                    */
+        /* ====================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+        }
+        body {
+            background-color: white;
+            color: var(--secondary-900);
+        }
+        /* ====================================== */
+        /* UTILITY CLASSES - LAYOUT              */
+        /* ====================================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-4); }/* Container System */
+        .container-sm { max-width: 640px; margin: 0 auto; padding: 0 var(--space-4); }
+        .container-md { max-width: 768px; margin: 0 auto; padding: 0 var(--space-4); }
+        .container-lg { max-width: 1024px; margin: 0 auto; padding: 0 var(--space-4); }
+        .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-4); }
+        .container-2xl { max-width: 1536px; margin: 0 auto; padding: 0 var(--space-4); }
+        .flex { display: flex; }/* Flexbox System */
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-nowrap { flex-wrap: nowrap; }
+        .flex-1 { flex: 1 1 0%; }
+        .flex-auto { flex: 1 1 auto; }
+        .flex-none { flex: none; }
+        .flex-shrink-0 { flex-shrink: 0; }
+        .flex-grow { flex-grow: 1; }
+        .justify-start { justify-content: flex-start; }/* Justify Content */
+        .justify-end { justify-content: flex-end; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .justify-evenly { justify-content: space-evenly; }
+        .items-start { align-items: flex-start; }/* Align Items */
+        .items-end { align-items: flex-end; }
+        .items-center { align-items: center; }
+        .items-baseline { align-items: baseline; }
+        .items-stretch { align-items: stretch; }
+        .grid { display: grid; }/* Grid System */
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+        .grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+        .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+        .col-span-1 { grid-column: span 1 / span 1; }
+        .col-span-2 { grid-column: span 2 / span 2; }
+        .col-span-3 { grid-column: span 3 / span 3; }
+        .col-span-4 { grid-column: span 4 / span 4; }
+        .col-span-5 { grid-column: span 5 / span 5; }
+        .col-span-6 { grid-column: span 6 / span 6; }
+        .col-span-full { grid-column: 1 / -1; }
+        .gap-1 { gap: var(--space-1); }
+        .gap-2 { gap: var(--space-2); }
+        .gap-3 { gap: var(--space-3); }
+        .gap-4 { gap: var(--space-4); }
+        .gap-5 { gap: var(--space-5); }
+        .gap-6 { gap: var(--space-6); }
+        .gap-8 { gap: var(--space-8); }
+        .gap-10 { gap: var(--space-10); }
+        .gap-12 { gap: var(--space-12); }
+        .static { position: static; } /* Position */
+        .fixed { position: fixed; }
+        .absolute { position: absolute; }
+        .relative { position: relative; }
+        .sticky { position: sticky; }
+        .block { display: block; }/* Display */
+        .inline-block { display: inline-block; }
+        .inline { display: inline; }
+        .hidden { display: none; }
+        /* ====================================== */
+        /* UTILITY CLASSES - SPACING             */
+        /* ====================================== */
+        .m-0 { margin: 0; }/* Margin */
+        .m-1 { margin: var(--space-1); }
+        .m-2 { margin: var(--space-2); }
+        .m-3 { margin: var(--space-3); }
+        .m-4 { margin: var(--space-4); }
+        .m-5 { margin: var(--space-5); }
+        .m-6 { margin: var(--space-6); }
+        .m-8 { margin: var(--space-8); }
+        .m-10 { margin: var(--space-10); }
+        .m-12 { margin: var(--space-12); }
+        .m-16 { margin: var(--space-16); }
+        .m-20 { margin: var(--space-20); }
+        .m-24 { margin: var(--space-24); }
+        .m-32 { margin: var(--space-32); }
+        .m-auto { margin: auto; }
+        .mx-0 { margin-left: 0; margin-right: 0; }/* Margin X */
+        .mx-1 { margin-left: var(--space-1); margin-right: var(--space-1); }
+        .mx-2 { margin-left: var(--space-2); margin-right: var(--space-2); }
+        .mx-3 { margin-left: var(--space-3); margin-right: var(--space-3); }
+        .mx-4 { margin-left: var(--space-4); margin-right: var(--space-4); }
+        .mx-5 { margin-left: var(--space-5); margin-right: var(--space-5); }
+        .mx-6 { margin-left: var(--space-6); margin-right: var(--space-6); }
+        .mx-8 { margin-left: var(--space-8); margin-right: var(--space-8); }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .my-0 { margin-top: 0; margin-bottom: 0; }/* Margin Y */
+        .my-1 { margin-top: var(--space-1); margin-bottom: var(--space-1); }
+        .my-2 { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+        .my-3 { margin-top: var(--space-3); margin-bottom: var(--space-3); }
+        .my-4 { margin-top: var(--space-4); margin-bottom: var(--space-4); }
+        .my-5 { margin-top: var(--space-5); margin-bottom: var(--space-5); }
+        .my-6 { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+        .my-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+        .my-12 { margin-top: var(--space-12); margin-bottom: var(--space-12); }
+        .my-16 { margin-top: var(--space-16); margin-bottom: var(--space-16); }
+        .p-0 { padding: 0; }/* Padding */
+        .p-1 { padding: var(--space-1); }
+        .p-2 { padding: var(--space-2); }
+        .p-3 { padding: var(--space-3); }
+        .p-4 { padding: var(--space-4); }
+        .p-5 { padding: var(--space-5); }
+        .p-6 { padding: var(--space-6); }
+        .p-8 { padding: var(--space-8); }
+        .p-10 { padding: var(--space-10); }
+        .p-12 { padding: var(--space-12); }
+        .p-16 { padding: var(--space-16); }
+        .p-20 { padding: var(--space-20); }
+        .p-24 { padding: var(--space-24); }
+        .p-32 { padding: var(--space-32); }
+        .px-0 { padding-left: 0; padding-right: 0; }/* Padding X */
+        .px-1 { padding-left: var(--space-1); padding-right: var(--space-1); }
+        .px-2 { padding-left: var(--space-2); padding-right: var(--space-2); }
+        .px-3 { padding-left: var(--space-3); padding-right: var(--space-3); }
+        .px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+        .px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
+        .px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
+        .px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+        .px-12 { padding-left: var(--space-12); padding-right: var(--space-12); }
+        .px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
+        .py-0 { padding-top: 0; padding-bottom: 0; }/* Padding Y */
+        .py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+        .py-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+        .py-3 { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+        .py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+        .py-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+        .py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+        .py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+        .py-12 { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+        .py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+        /* ====================================== */
+        /* UTILITY CLASSES - TYPOGRAPHY          */
+        /* ====================================== */
+        .text-xs { font-size: var(--font-xs); line-height: 1rem; }/* Font Size */
+        .text-sm { font-size: var(--font-sm); line-height: 1.25rem; }
+        .text-base { font-size: var(--font-base); line-height: 1.5rem; }
+        .text-lg { font-size: var(--font-lg); line-height: 1.75rem; }
+        .text-xl { font-size: var(--font-xl); line-height: 1.75rem; }
+        .text-2xl { font-size: var(--font-2xl); line-height: 2rem; }
+        .text-3xl { font-size: var(--font-3xl); line-height: 2.25rem; }
+        .text-4xl { font-size: var(--font-4xl); line-height: 2.5rem; }
+        .text-5xl { font-size: var(--font-5xl); line-height: 1; }
+        .text-6xl { font-size: var(--font-6xl); line-height: 1; }
+        .font-thin { font-weight: 100; }/* Font Weight */
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .font-black { font-weight: 900; }
+        .text-primary-50 { color: var(--primary-50); }/* Text Color */
+        .text-primary-100 { color: var(--primary-100); }
+        .text-primary-200 { color: var(--primary-200); }
+        .text-primary-300 { color: var(--primary-300); }
+        .text-primary-400 { color: var(--primary-400); }
+        .text-primary-500 { color: var(--primary-500); }
+        .text-primary-600 { color: var(--primary-600); }
+        .text-primary-700 { color: var(--primary-700); }
+        .text-primary-800 { color: var(--primary-800); }
+        .text-primary-900 { color: var(--primary-900); }
+        .text-secondary-50 { color: var(--secondary-50); }
+        .text-secondary-100 { color: var(--secondary-100); }
+        .text-secondary-200 { color: var(--secondary-200); }
+        .text-secondary-300 { color: var(--secondary-300); }
+        .text-secondary-400 { color: var(--secondary-400); }
+        .text-secondary-500 { color: var(--secondary-500); }
+        .text-secondary-600 { color: var(--secondary-600); }
+        .text-secondary-700 { color: var(--secondary-700); }
+        .text-secondary-800 { color: var(--secondary-800); }
+        .text-secondary-900 { color: var(--secondary-900); }
+        .text-white { color: white; }
+        .text-black { color: black; }
+        .text-success { color: var(--success-500); }
+        .text-warning { color: var(--warning-500); }
+        .text-error { color: var(--error-500); }
+        .text-left { text-align: left; }/* Text Align */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-justify { text-align: justify; }
+        .leading-none { line-height: 1; }/* Line Height */
+        .leading-tight { line-height: 1.25; }
+        .leading-snug { line-height: 1.375; }
+        .leading-normal { line-height: 1.5; }
+        .leading-relaxed { line-height: 1.625; }
+        .leading-loose { line-height: 2; }
+        /* ====================================== */
+        /* UTILITY CLASSES - COLORS & BACKGROUNDS */
+        /* ====================================== */
+        .bg-primary-50 { background-color: var(--primary-50); }/* Background Colors */
+        .bg-primary-100 { background-color: var(--primary-100); }
+        .bg-primary-200 { background-color: var(--primary-200); }
+        .bg-primary-300 { background-color: var(--primary-300); }
+        .bg-primary-400 { background-color: var(--primary-400); }
+        .bg-primary-500 { background-color: var(--primary-500); }
+        .bg-primary-600 { background-color: var(--primary-600); }
+        .bg-primary-700 { background-color: var(--primary-700); }
+        .bg-primary-800 { background-color: var(--primary-800); }
+        .bg-primary-900 { background-color: var(--primary-900); }
+        .bg-secondary-50 { background-color: var(--secondary-50); }
+        .bg-secondary-100 { background-color: var(--secondary-100); }
+        .bg-secondary-200 { background-color: var(--secondary-200); }
+        .bg-secondary-300 { background-color: var(--secondary-300); }
+        .bg-secondary-400 { background-color: var(--secondary-400); }
+        .bg-secondary-500 { background-color: var(--secondary-500); }
+        .bg-secondary-600 { background-color: var(--secondary-600); }
+        .bg-secondary-700 { background-color: var(--secondary-700); }
+        .bg-secondary-800 { background-color: var(--secondary-800); }
+        .bg-secondary-900 { background-color: var(--secondary-900); }
+        .bg-white { background-color: white; }
+        .bg-black { background-color: black; }
+        .bg-transparent { background-color: transparent; }
+        .bg-success { background-color: var(--success-500); }
+        .bg-warning { background-color: var(--warning-500); }
+        .bg-error { background-color: var(--error-500); }
+        .bg-gradient-primary { background: linear-gradient(135deg, var(--primary-500), var(--primary-700)); }/* Gradient Backgrounds */
+        .bg-gradient-secondary { background: linear-gradient(135deg, var(--secondary-500), var(--secondary-700)); }
+        .bg-gradient-rainbow { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .bg-gradient-sunset { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .bg-gradient-ocean { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        /* ====================================== */
+        /* UTILITY CLASSES - BORDERS & SHADOWS   */
+        /* ====================================== */
+        .rounded-none { border-radius: 0; }/* Border Radius */
+        .rounded-sm { border-radius: var(--border-radius-sm); }
+        .rounded { border-radius: var(--border-radius-md); }
+        .rounded-md { border-radius: var(--border-radius-md); }
+        .rounded-lg { border-radius: var(--border-radius-lg); }
+        .rounded-xl { border-radius: var(--border-radius-xl); }
+        .rounded-2xl { border-radius: var(--border-radius-2xl); }
+        .rounded-3xl { border-radius: var(--border-radius-3xl); }
+        .rounded-full { border-radius: var(--border-radius-full); }
+        .shadow-sm { box-shadow: var(--shadow-sm); } /* Shadows */
+        .shadow { box-shadow: var(--shadow-md); }
+        .shadow-md { box-shadow: var(--shadow-md); }
+        .shadow-lg { box-shadow: var(--shadow-lg); }
+        .shadow-xl { box-shadow: var(--shadow-xl); }
+        .shadow-none { box-shadow: none; }
+        .border { border: 1px solid var(--secondary-200); } /* Borders */
+        .border-0 { border: 0; }
+        .border-2 { border: 2px solid var(--secondary-200); }
+        .border-4 { border: 4px solid var(--secondary-200); }
+        .border-primary { border-color: var(--primary-500); }
+        .border-secondary { border-color: var(--secondary-500); }
+        .border-success { border-color: var(--success-500); }
+        .border-warning { border-color: var(--warning-500); }
+        .border-error { border-color: var(--error-500); }
+        /* ====================================== */
+        /* UTILITY CLASSES - SIZING              */
+        /* ====================================== */
+        .w-0 { width: 0; }/* Width */
+        .w-full { width: 100%; }
+        .w-screen { width: 100vw; }
+        .w-auto { width: auto; }
+        .w-1\/2 { width: 50%; }
+        .w-1\/3 { width: 33.333333%; }
+        .w-2\/3 { width: 66.666667%; }
+        .w-1\/4 { width: 25%; }
+        .w-3\/4 { width: 75%; }
+        .w-1\/5 { width: 20%; }
+        .w-2\/5 { width: 40%; }
+        .w-3\/5 { width: 60%; }
+        .w-4\/5 { width: 80%; }
+        .w-1\/6 { width: 16.666667%; }
+        .w-5\/6 { width: 83.333333%; }
+        .w-1\/12 { width: 8.333333%; }
+        .w-5\/12 { width: 41.666667%; }
+        .w-7\/12 { width: 58.333333%; }
+        .w-11\/12 { width: 91.666667%; }
+        .h-0 { height: 0; }/* Height */
+        .h-full { height: 100%; }
+        .h-screen { height: 100vh; }
+        .h-auto { height: auto; }
+        .h-64 { height: 16rem; }
+        .h-80 { height: 20rem; }
+        .h-96 { height: 24rem; }
+        .min-w-0 { min-width: 0; }/* Min/Max Width */
+        .min-w-full { min-width: 100%; }
+        .max-w-none { max-width: none; }
+        .max-w-xs { max-width: 20rem; }
+        .max-w-sm { max-width: 24rem; }
+        .max-w-md { max-width: 28rem; }
+        .max-w-lg { max-width: 32rem; }
+        .max-w-xl { max-width: 36rem; }
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-3xl { max-width: 48rem; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-5xl { max-width: 64rem; }
+        .max-w-6xl { max-width: 72rem; }
+        .max-w-7xl { max-width: 80rem; }
+        .max-w-full { max-width: 100%; }
+        /* ====================================== */
+        /* UTILITY CLASSES - INTERACTIONS        */
+        /* ====================================== */
+        .cursor-auto { cursor: auto; }/* Cursor */
+        .cursor-default { cursor: default; }
+        .cursor-pointer { cursor: pointer; }
+        .cursor-wait { cursor: wait; }
+        .cursor-text { cursor: text; }
+        .cursor-move { cursor: move; }
+        .cursor-help { cursor: help; }
+        .cursor-not-allowed { cursor: not-allowed; }
+        .select-none { user-select: none; }/* User Select */
+        .select-text { user-select: text; }
+        .select-all { user-select: all; }
+        .select-auto { user-select: auto; }
+        .pointer-events-none { pointer-events: none; }/* Pointer Events */
+        .pointer-events-auto { pointer-events: auto; }
+        /* ====================================== */
+        /* UTILITY CLASSES - TRANSFORMS & ANIMATIONS */
+        /* ====================================== */
+        .transform { transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }/* Transform */
+        .transform-none { transform: none; }
+        .scale-0 { transform: scale(0); }/* Scale */
+        .scale-50 { transform: scale(0.5); }
+        .scale-75 { transform: scale(0.75); }
+        .scale-90 { transform: scale(0.9); }
+        .scale-95 { transform: scale(0.95); }
+        .scale-100 { transform: scale(1); }
+        .scale-105 { transform: scale(1.05); }
+        .scale-110 { transform: scale(1.1); }
+        .scale-125 { transform: scale(1.25); }
+        .scale-150 { transform: scale(1.5); }
+        .rotate-0 { transform: rotate(0deg); }/* Rotate */
+        .rotate-1 { transform: rotate(1deg); }
+        .rotate-2 { transform: rotate(2deg); }
+        .rotate-3 { transform: rotate(3deg); }
+        .rotate-6 { transform: rotate(6deg); }
+        .rotate-12 { transform: rotate(12deg); }
+        .rotate-45 { transform: rotate(45deg); }
+        .rotate-90 { transform: rotate(90deg); }
+        .rotate-180 { transform: rotate(180deg); }
+        .-rotate-1 { transform: rotate(-1deg); }
+        .-rotate-2 { transform: rotate(-2deg); }
+        .-rotate-3 { transform: rotate(-3deg); }
+        .-rotate-6 { transform: rotate(-6deg); }
+        .-rotate-12 { transform: rotate(-12deg); }
+        .-rotate-45 { transform: rotate(-45deg); }
+        .-rotate-90 { transform: rotate(-90deg); }
+        .-rotate-180 { transform: rotate(-180deg); }
+        .translate-x-0 { transform: translateX(0); }/* Translate */
+        .translate-x-1 { transform: translateX(0.25rem); }
+        .translate-x-2 { transform: translateX(0.5rem); }
+        .translate-x-3 { transform: translateX(0.75rem); }
+        .translate-x-4 { transform: translateX(1rem); }
+        .translate-x-5 { transform: translateX(1.25rem); }
+        .translate-x-6 { transform: translateX(1.5rem); }
+        .translate-x-8 { transform: translateX(2rem); }
+        .translate-x-10 { transform: translateX(2.5rem); }
+        .translate-x-12 { transform: translateX(3rem); }
+        .translate-x-16 { transform: translateX(4rem); }
+        .translate-x-20 { transform: translateX(5rem); }
+        .translate-x-24 { transform: translateX(6rem); }
+        .translate-x-32 { transform: translateX(8rem); }
+        .translate-x-40 { transform: translateX(10rem); }
+        .translate-x-48 { transform: translateX(12rem); }
+        .translate-x-56 { transform: translateX(14rem); }
+        .translate-x-64 { transform: translateX(16rem); }
+        .translate-x-1\/2 { transform: translateX(50%); }
+        .translate-x-1\/3 { transform: translateX(33.333333%); }
+        .translate-x-2\/3 { transform: translateX(66.666667%); }
+        .translate-x-1\/4 { transform: translateX(25%); }
+        .translate-x-2\/4 { transform: translateX(50%); }
+        .translate-x-3\/4 { transform: translateX(75%); }
+        .translate-x-full { transform: translateX(100%); }
+        .-translate-x-1 { transform: translateX(-0.25rem); }
+        .-translate-x-2 { transform: translateX(-0.5rem); }
+        .-translate-x-3 { transform: translateX(-0.75rem); }
+        .-translate-x-4 { transform: translateX(-1rem); }
+        .-translate-x-5 { transform: translateX(-1.25rem); }
+        .-translate-x-6 { transform: translateX(-1.5rem); }
+        .-translate-x-8 { transform: translateX(-2rem); }
+        .-translate-x-10 { transform: translateX(-2.5rem); }
+        .-translate-x-12 { transform: translateX(-3rem); }
+        .-translate-x-16 { transform: translateX(-4rem); }
+        .-translate-x-20 { transform: translateX(-5rem); }
+        .-translate-x-24 { transform: translateX(-6rem); }
+        .-translate-x-32 { transform: translateX(-8rem); }
+        .-translate-x-40 { transform: translateX(-10rem); }
+        .-translate-x-48 { transform: translateX(-12rem); }
+        .-translate-x-56 { transform: translateX(-14rem); }
+        .-translate-x-64 { transform: translateX(-16rem); }
+        .-translate-x-1\/2 { transform: translateX(-50%); }
+        .-translate-x-1\/3 { transform: translateX(-33.333333%); }
+        .-translate-x-2\/3 { transform: translateX(-66.666667%); }
+        .-translate-x-1\/4 { transform: translateX(-25%); }
+        .-translate-x-2\/4 { transform: translateX(-50%); }
+        .-translate-x-3\/4 { transform: translateX(-75%); }
+        .-translate-x-full { transform: translateX(-100%); }
+        .translate-y-0 { transform: translateY(0); }
+        .translate-y-1 { transform: translateY(0.25rem); }
+        .translate-y-2 { transform: translateY(0.5rem); }
+        .translate-y-3 { transform: translateY(0.75rem); }
+        .translate-y-4 { transform: translateY(1rem); }
+        .translate-y-5 { transform: translateY(1.25rem); }
+        .translate-y-6 { transform: translateY(1.5rem); }
+        .translate-y-8 { transform: translateY(2rem); }
+        .translate-y-10 { transform: translateY(2.5rem); }
+        .translate-y-12 { transform: translateY(3rem); }
+        .translate-y-16 { transform: translateY(4rem); }
+        .translate-y-20 { transform: translateY(5rem); }
+        .translate-y-24 { transform: translateY(6rem); }
+        .translate-y-32 { transform: translateY(8rem); }
+        .translate-y-40 { transform: translateY(10rem); }
+        .translate-y-48 { transform: translateY(12rem); }
+        .translate-y-56 { transform: translateY(14rem); }
+        .translate-y-64 { transform: translateY(16rem); }
+        .translate-y-1\/2 { transform: translateY(50%); }
+        .translate-y-1\/3 { transform: translateY(33.333333%); }
+        .translate-y-2\/3 { transform: translateY(66.666667%); }
+        .translate-y-1\/4 { transform: translateY(25%); }
+        .translate-y-2\/4 { transform: translateY(50%); }
+        .translate-y-3\/4 { transform: translateY(75%); }
+        .translate-y-full { transform: translateY(100%); }
+        .-translate-y-1 { transform: translateY(-0.25rem); }
+        .-translate-y-2 { transform: translateY(-0.5rem); }
+        .-translate-y-3 { transform: translateY(-0.75rem); }
+        .-translate-y-4 { transform: translateY(-1rem); }
+        .-translate-y-5 { transform: translateY(-1.25rem); }
+        .-translate-y-6 { transform: translateY(-1.5rem); }
+        .-translate-y-8 { transform: translateY(-2rem); }
+        .-translate-y-10 { transform: translateY(-2.5rem); }
+        .-translate-y-12 { transform: translateY(-3rem); }
+        .-translate-y-16 { transform: translateY(-4rem); }
+        .-translate-y-20 { transform: translateY(-5rem); }
+        .-translate-y-24 { transform: translateY(-6rem); }
+        .-translate-y-32 { transform: translateY(-8rem); }
+        .-translate-y-40 { transform: translateY(-10rem); }
+        .-translate-y-48 { transform: translateY(-12rem); }
+        .-translate-y-56 { transform: translateY(-14rem); }
+        .-translate-y-64 { transform: translateY(-16rem); }
+        .-translate-y-1\/2 { transform: translateY(-50%); }
+        .-translate-y-1\/3 { transform: translateY(-33.333333%); }
+        .-translate-y-2\/3 { transform: translateY(-66.666667%); }
+        .-translate-y-1\/4 { transform: translateY(-25%); }
+        .-translate-y-2\/4 { transform: translateY(-50%); }
+        .-translate-y-3\/4 { transform: translateY(-75%); }
+        .-translate-y-full { transform: translateY(-100%); }
+        .transition-none { transition: none; }/* Transitions */
+        .transition-all { transition: all var(--transition-normal); }
+        .transition { transition: all var(--transition-normal); }
+        .transition-colors { transition: color var(--transition-normal), background-color var(--transition-normal), border-color var(--transition-normal); }
+        .transition-opacity { transition: opacity var(--transition-normal); }
+        .transition-shadow { transition: box-shadow var(--transition-normal); }
+        .transition-transform { transition: transform var(--transition-normal); }
+        .duration-75 { transition-duration: 75ms; } /* Duration */
+        .duration-100 { transition-duration: 100ms; }
+        .duration-150 { transition-duration: 150ms; }
+        .duration-200 { transition-duration: 200ms; }
+        .duration-300 { transition-duration: 300ms; }
+        .duration-500 { transition-duration: 500ms; }
+        .duration-700 { transition-duration: 700ms; }
+        .duration-1000 { transition-duration: 1000ms; }
+        .ease-linear { transition-timing-function: linear; }/* Timing Function */
+        .ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+        .ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes spin {to { transform: rotate(360deg); }}/* Animations */
+        @keyframes ping {75%, 100% { transform: scale(2); opacity: 0; }}
+        @keyframes pulse {50% { opacity: 0.5; }}
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+            50% { transform: none; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes flipInX {
+            from { transform: perspective(400px) rotate3d(1, 0, 0, 90deg); animation-timing-function: ease-in; opacity: 0; }
+            40% { transform: perspective(400px) rotate3d(1, 0, 0, -20deg); animation-timing-function: ease-in; }
+            60% { transform: perspective(400px) rotate3d(1, 0, 0, 10deg); opacity: 1; }
+            80% { transform: perspective(400px) rotate3d(1, 0, 0, -5deg); }
+            to { transform: perspective(400px); }
+        }
+        .animate-spin { animation: spin 1s linear infinite; }
+        .animate-ping { animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .animate-bounce { animation: bounce 1s infinite; }
+        .animate-fadeIn { animation: fadeIn 0.6s ease-out forwards; }
+        .animate-slideInLeft { animation: slideInLeft 0.6s ease-out forwards; }
+        .animate-slideInRight { animation: slideInRight 0.6s ease-out forwards; }
+        .animate-slideInUp { animation: slideInUp 0.6s ease-out forwards; }
+        .animate-slideInDown { animation: slideInDown 0.6s ease-out forwards; }
+        .animate-zoomIn { animation: zoomIn 0.6s ease-out forwards; }
+        .animate-flipInX { animation: flipInX 0.75s ease-out forwards; }
+        /* ====================================== */
+        /* UTILITY CLASSES - OPACITY & VISIBILITY */
+        /* ====================================== */
+        .opacity-0 { opacity: 0; }/* Opacity */
+        .opacity-5 { opacity: 0.05; }
+        .opacity-10 { opacity: 0.1; }
+        .opacity-20 { opacity: 0.2; }
+        .opacity-25 { opacity: 0.25; }
+        .opacity-30 { opacity: 0.3; }
+        .opacity-40 { opacity: 0.4; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-60 { opacity: 0.6; }
+        .opacity-70 { opacity: 0.7; }
+        .opacity-75 { opacity: 0.75; }
+        .opacity-80 { opacity: 0.8; }
+        .opacity-90 { opacity: 0.9; }
+        .opacity-95 { opacity: 0.95; }
+        .opacity-100 { opacity: 1; }
+        .visible { visibility: visible; } /* Visibility */
+        .invisible { visibility: hidden; }
+        .z-0 { z-index: 0; } /* Z-Index */
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        .z-30 { z-index: 30; }
+        .z-40 { z-index: 40; }
+        .z-50 { z-index: 50; }
+        .z-auto { z-index: auto; }
+        /* ====================================== */
+        /* UTILITY CLASSES - OVERFLOW            */
+        /* ====================================== */
+        .overflow-auto { overflow: auto; }/* Overflow */
+        .overflow-hidden { overflow: hidden; }
+        .overflow-visible { overflow: visible; }
+        .overflow-scroll { overflow: scroll; }
+        .overflow-x-auto { overflow-x: auto; }
+        .overflow-y-auto { overflow-y: auto; }
+        .overflow-x-hidden { overflow-x: hidden; }
+        .overflow-y-hidden { overflow-y: hidden; }
+        .overflow-x-visible { overflow-x: visible; }
+        .overflow-y-visible { overflow-y: visible; }
+        .overflow-x-scroll { overflow-x: scroll; }
+        .overflow-y-scroll { overflow-y: scroll; }
+        /* ====================================== */
+        /* RESPONSIVE DESIGN SYSTEM               */
+        /* ====================================== */
+        @media (min-width: 640px) {/* SM - Small devices *//* Responsive Breakpoints */
+            .sm\:container { max-width: 640px; margin: 0 auto; padding: 0 var(--space-4); }
+            .sm\:flex { display: flex; }
+            .sm\:grid { display: grid; }
+            .sm\:hidden { display: none; }
+            .sm\:block { display: block; }
+            .sm\:inline { display: inline; }
+            .sm\:inline-block { display: inline-block; }
+            .sm\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .sm\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .sm\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .sm\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            .sm\:text-left { text-align: left; }
+            .sm\:text-center { text-align: center; }
+            .sm\:text-right { text-align: right; }
+            .sm\:text-xs { font-size: var(--font-xs); line-height: 1rem; }
+            .sm\:text-sm { font-size: var(--font-sm); line-height: 1.25rem; }
+            .sm\:text-base { font-size: var(--font-base); line-height: 1.5rem; }
+            .sm\:text-lg { font-size: var(--font-lg); line-height: 1.75rem; }
+            .sm\:text-xl { font-size: var(--font-xl); line-height: 1.75rem; }
+            .sm\:text-2xl { font-size: var(--font-2xl); line-height: 2rem; }
+            .sm\:text-3xl { font-size: var(--font-3xl); line-height: 2.25rem; }
+            .sm\:text-4xl { font-size: var(--font-4xl); line-height: 2.5rem; }
+            .sm\:text-5xl { font-size: var(--font-5xl); line-height: 1; }
+            .sm\:text-6xl { font-size: var(--font-6xl); line-height: 1; }
+            .sm\:p-0 { padding: 0; }
+            .sm\:p-1 { padding: var(--space-1); }
+            .sm\:p-2 { padding: var(--space-2); }
+            .sm\:p-3 { padding: var(--space-3); }
+            .sm\:p-4 { padding: var(--space-4); }
+            .sm\:p-5 { padding: var(--space-5); }
+            .sm\:p-6 { padding: var(--space-6); }
+            .sm\:p-8 { padding: var(--space-8); }
+            .sm\:p-10 { padding: var(--space-10); }
+            .sm\:p-12 { padding: var(--space-12); }
+            .sm\:p-16 { padding: var(--space-16); }
+            .sm\:p-20 { padding: var(--space-20); }
+            .sm\:p-24 { padding: var(--space-24); }
+            .sm\:p-32 { padding: var(--space-32); }
+            .sm\:px-0 { padding-left: 0; padding-right: 0; }
+            .sm\:px-1 { padding-left: var(--space-1); padding-right: var(--space-1); }
+            .sm\:px-2 { padding-left: var(--space-2); padding-right: var(--space-2); }
+            .sm\:px-3 { padding-left: var(--space-3); padding-right: var(--space-3); }
+            .sm\:px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+            .sm\:px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
+            .sm\:px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
+            .sm\:px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+            .sm\:px-12 { padding-left: var(--space-12); padding-right: var(--space-12); }
+            .sm\:px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
+            .sm\:py-0 { padding-top: 0; padding-bottom: 0; }
+            .sm\:py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+            .sm\:py-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+            .sm\:py-3 { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+            .sm\:py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+            .sm\:py-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+            .sm\:py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+            .sm\:py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+            .sm\:py-12 { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+            .sm\:py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+            .sm\:m-0 { margin: 0; }
+            .sm\:m-1 { margin: var(--space-1); }
+            .sm\:m-2 { margin: var(--space-2); }
+            .sm\:m-3 { margin: var(--space-3); }
+            .sm\:m-4 { margin: var(--space-4); }
+            .sm\:m-5 { margin: var(--space-5); }
+            .sm\:m-6 { margin: var(--space-6); }
+            .sm\:m-8 { margin: var(--space-8); }
+            .sm\:m-10 { margin: var(--space-10); }
+            .sm\:m-12 { margin: var(--space-12); }
+            .sm\:m-16 { margin: var(--space-16); }
+            .sm\:m-20 { margin: var(--space-20); }
+            .sm\:m-24 { margin: var(--space-24); }
+            .sm\:m-32 { margin: var(--space-32); }
+            .sm\:m-auto { margin: auto; }
+            .sm\:mx-0 { margin-left: 0; margin-right: 0; }
+            .sm\:mx-1 { margin-left: var(--space-1); margin-right: var(--space-1); }
+            .sm\:mx-2 { margin-left: var(--space-2); margin-right: var(--space-2); }
+            .sm\:mx-3 { margin-left: var(--space-3); margin-right: var(--space-3); }
+            .sm\:mx-4 { margin-left: var(--space-4); margin-right: var(--space-4); }
+            .sm\:mx-5 { margin-left: var(--space-5); margin-right: var(--space-5); }
+            .sm\:mx-6 { margin-left: var(--space-6); margin-right: var(--space-6); }
+            .sm\:mx-8 { margin-left: var(--space-8); margin-right: var(--space-8); }
+            .sm\:mx-auto { margin-left: auto; margin-right: auto; }
+            .sm\:my-0 { margin-top: 0; margin-bottom: 0; }
+            .sm\:my-1 { margin-top: var(--space-1); margin-bottom: var(--space-1); }
+            .sm\:my-2 { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+            .sm\:my-3 { margin-top: var(--space-3); margin-bottom: var(--space-3); }
+            .sm\:my-4 { margin-top: var(--space-4); margin-bottom: var(--space-4); }
+            .sm\:my-5 { margin-top: var(--space-5); margin-bottom: var(--space-5); }
+            .sm\:my-6 { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+            .sm\:my-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+            .sm\:my-12 { margin-top: var(--space-12); margin-bottom: var(--space-12); }
+            .sm\:my-16 { margin-top: var(--space-16); margin-bottom: var(--space-16); }
+        }
+        @media (min-width: 768px) {/* MD - Medium devices */
+            .md\:container { max-width: 768px; margin: 0 auto; padding: 0 var(--space-4); }
+            .md\:flex { display: flex; }
+            .md\:grid { display: grid; }
+            .md\:hidden { display: none; }
+            .md\:block { display: block; }
+            .md\:inline { display: inline; }
+            .md\:inline-block { display: inline-block; }
+            .md\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .md\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            .md\:text-left { text-align: left; }
+            .md\:text-center { text-align: center; }
+            .md\:text-right { text-align: right; }
+            .md\:text-xs { font-size: var(--font-xs); line-height: 1rem; }
+            .md\:text-sm { font-size: var(--font-sm); line-height: 1.25rem; }
+            .md\:text-base { font-size: var(--font-base); line-height: 1.5rem; }
+            .md\:text-lg { font-size: var(--font-lg); line-height: 1.75rem; }
+            .md\:text-xl { font-size: var(--font-xl); line-height: 1.75rem; }
+            .md\:text-2xl { font-size: var(--font-2xl); line-height: 2rem; }
+            .md\:text-3xl { font-size: var(--font-3xl); line-height: 2.25rem; }
+            .md\:text-4xl { font-size: var(--font-4xl); line-height: 2.5rem; }
+            .md\:text-5xl { font-size: var(--font-5xl); line-height: 1; }
+            .md\:text-6xl { font-size: var(--font-6xl); line-height: 1; }
+            .md\:flex-row { flex-direction: row; }
+            .md\:flex-col { flex-direction: column; }
+            .md\:justify-start { justify-content: flex-start; }
+            .md\:justify-end { justify-content: flex-end; }
+            .md\:justify-center { justify-content: center; }
+            .md\:justify-between { justify-content: space-between; }
+            .md\:justify-around { justify-content: space-around; }
+            .md\:justify-evenly { justify-content: space-evenly; }
+            .md\:items-start { align-items: flex-start; }
+            .md\:items-end { align-items: flex-end; }
+            .md\:items-center { align-items: center; }
+            .md\:items-baseline { align-items: baseline; }
+            .md\:items-stretch { align-items: stretch; }
+        }
+        @media (min-width: 1024px) {/* LG - Large devices */
+            .lg\:container { max-width: 1024px; margin: 0 auto; padding: 0 var(--space-4); }
+            .lg\:flex { display: flex; }
+            .lg\:grid { display: grid; }
+            .lg\:hidden { display: none; }
+            .lg\:block { display: block; }
+            .lg\:inline { display: inline; }
+            .lg\:inline-block { display: inline-block; }
+            .lg\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            .lg\:text-left { text-align: left; }
+            .lg\:text-center { text-align: center; }
+            .lg\:text-right { text-align: right; }
+            .lg\:text-xs { font-size: var(--font-xs); line-height: 1rem; }
+            .lg\:text-sm { font-size: var(--font-sm); line-height: 1.25rem; }
+            .lg\:text-base { font-size: var(--font-base); line-height: 1.5rem; }
+            .lg\:text-lg { font-size: var(--font-lg); line-height: 1.75rem; }
+            .lg\:text-xl { font-size: var(--font-xl); line-height: 1.75rem; }
+            .lg\:text-2xl { font-size: var(--font-2xl); line-height: 2rem; }
+            .lg\:text-3xl { font-size: var(--font-3xl); line-height: 2.25rem; }
+            .lg\:text-4xl { font-size: var(--font-4xl); line-height: 2.5rem; }
+            .lg\:text-5xl { font-size: var(--font-5xl); line-height: 1; }
+            .lg\:text-6xl { font-size: var(--font-6xl); line-height: 1; }
+            .lg\:flex-row { flex-direction: row; }
+            .lg\:flex-col { flex-direction: column; }
+            .lg\:justify-start { justify-content: flex-start; }
+            .lg\:justify-end { justify-content: flex-end; }
+            .lg\:justify-center { justify-content: center; }
+            .lg\:justify-between { justify-content: space-between; }
+            .lg\:justify-around { justify-content: space-around; }
+            .lg\:justify-evenly { justify-content: space-evenly; }
+            .lg\:items-start { align-items: flex-start; }
+            .lg\:items-end { align-items: flex-end; }
+            .lg\:items-center { align-items: center; }
+            .lg\:items-baseline { align-items: baseline; }
+            .lg\:items-stretch { align-items: stretch; }
+        }
+        @media (min-width: 1280px) {/* XL - Extra large devices */
+            .xl\:container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-4); }
+            .xl\:flex { display: flex; }
+            .xl\:grid { display: grid; }
+            .xl\:hidden { display: none; }
+            .xl\:block { display: block; }
+            .xl\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .xl\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .xl\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .xl\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .xl\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .xl\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1536px) {/* 2XL - Extra extra large devices */
+            .\32xl\:container { max-width: 1536px; margin: 0 auto; padding: 0 var(--space-4); }
+            .\32xl\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .\32xl\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+        }
+        .demo-section {/* Demo-specific styles */
+            padding: var(--space-20) 0;
+            border-bottom: 1px solid var(--secondary-200);
+        }
+        .demo-card {transition: all 0.3s ease;}
+        .demo-card:hover {transform: translateY(-5px);}
+        .testimonial-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .testimonial-card::before {
+            content: "";  /*Removed extra quote */
+            position: absolute;  /*Changed semicolon to colon */
+            top: -20px;
+            left: -20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-100);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-primary {
+            background-color: var(--primary-500);
+            color: white;
+        }
+        .btn-primary:hover {background-color: var(--primary-600);}
+        .btn-secondary {
+            background-color: var(--secondary-500);
+            color: white;
+        }
+        .btn-secondary:hover {background-color: var(--secondary-600);}
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-500);
+            color: var(--primary-500);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-500);
+            color: white;
+        }
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            color: var(--secondary-800);
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {color: var(--primary-500);}
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-500);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {width: 100%;}
+        .hero {
+            background: linear-gradient(120deg, rgba(219, 234, 254, 0.7), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-6);
+            font-size: 1.75rem;
+        }
+        .pricing-card {transition: transform 0.3s ease, box-shadow 0.3s ease;}
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: var(--primary-200);
+            z-index: -1;
+            opacity: 0.7;
+            transform: skewX(-15deg);
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--border-radius-full);
+            background-color: var(--primary-100);
+            color: var(--primary-600);
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background-color: var(--primary-500);
+            color: white;
+            transform: translateY(-3px);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .mobile-menu.open {max-height: 500px;}
+    </style>
+</head>
+<body class="bg-secondary-50">
+    <nav class="sticky top-0 z-50 bg-white shadow-sm py-4"><!-- Navigation -->
+        <div class="container flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold text-primary-600">NexusCSS</span>
+            </div>
+            <div class="hidden md:flex space-x-6"><!-- Desktop Navigation -->
+                <a href="#" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+            <button id="menu-toggle" class="md:hidden text-primary-600"><!-- Mobile Menu Button -->
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white"><!-- Mobile Menu -->
+            <div class="container py-4 flex flex-col space-y-4">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="flex flex-col space-y-3 pt-4">
+                    <button class="btn btn-outline w-full">Sign In</button>
+                    <button class="btn btn-primary w-full">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="hero py-24"><!-- Hero Section -->
+        <div class="container flex flex-col items-center text-center px-4">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-secondary-900 animate-fadeIn">
+                Build Beautiful Interfaces <span class="text-primary-600">Faster</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary-600 max-w-3xl mb-10 animate-slideInUp">
+                NexusCSS is a modern utility-first CSS framework that helps you create responsive and accessible web applications with ease.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 animate-slideInUp">
+                <button class="btn btn-primary px-8 py-4 text-lg">Get Started</button>
+                <button class="btn btn-outline px-8 py-4 text-lg">View Demo</button>
+            </div>
+            <div class="mt-16 bg-white p-6 rounded-xl shadow-lg max-w-4xl w-full animate-zoomIn">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-400"></span>
+                    </div>
+                    <span class="text-sm text-secondary-500">Example: Responsive Card Grid</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="demo-card bg-white p-6 rounded-lg border border-secondary-200 shadow-sm">
+                        <div class="text-primary-500 mb-4">
+                            <i class="fas fa-rocket text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
+                        <p class="text-secondary-600">Optimized for performance with minimal overhead.</p>
+                    </div>
+                    <div class="demo-card bg-white p-6 rounded-lg border border-secondary-200 shadow-sm">
+                        <div class="text-primary-500 mb-4">
+                            <i class="fas fa-mobile-alt text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fully Responsive</h3>
+                        <p class="text-secondary-600">Works on all devices from mobile to desktop.</p>
+                    </div>
+                    <div class="demo-card bg-white p-6 rounded-lg border border-secondary-200 shadow-sm">
+                        <div class="text-primary-500 mb-4">
+                            <i class="fas fa-palette text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Customizable</h3>
+                        <p class="text-secondary-600">Easily theme with CSS variables.</p>
+                    </div>
+                    <div class="demo-card bg-white p-6 rounded-lg border border-secondary-200 shadow-sm">
+                        <div class="text-primary-500 mb-4">
+                            <i class="fas fa-code text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Clean Markup</h3>
+                        <p class="text-secondary-600">Semantic HTML with utility classes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="demo-section bg-white"><!-- Features Section -->
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-secondary-900">Powerful Features</h2>
+                <p class="text-xl text-secondary-600 max-w-2xl mx-auto">
+                    Everything you need to build modern web applications with speed and efficiency.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="demo-card p-8 rounded-xl border border-secondary-100 bg-white shadow-sm">
+                    <div class="feature-icon bg-primary-100 text-primary-600 mx-auto">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Utility-First</h3>
+                    <p class="text-secondary-600 mb-6 text-center">
+                        Build custom designs without ever leaving your HTML with our comprehensive utility classes.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Hundreds of utility classes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Responsive design modifiers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>State variants (hover, focus, etc.)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="demo-card p-8 rounded-xl border border-secondary-100 bg-white shadow-sm">
+                    <div class="feature-icon bg-primary-100 text-primary-600 mx-auto">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Design System</h3>
+                    <p class="text-secondary-600 mb-6 text-center">
+                        Consistent spacing, typography, and colors based on a scalable design system.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Color palette with multiple shades</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Modular scale for typography</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Consistent spacing system</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="demo-card p-8 rounded-xl border border-secondary-100 bg-white shadow-sm">
+                    <div class="feature-icon bg-primary-100 text-primary-600 mx-auto">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Animations</h3>
+                    <p class="text-secondary-600 mb-6 text-center">
+                        Beautiful, performant animations to bring your interfaces to life.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Predefined animation classes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Transition utilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Transform helpers</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="demo-section bg-secondary-100"><!-- Testimonials Section -->
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-secondary-900">What Developers Say</h2>
+                <p class="text-xl text-secondary-600 max-w-2xl mx-auto">
+                    Hear from developers who have transformed their workflow with NexusCSS.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm relative">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-white text-xl font-bold mr-4">JD</div>
+                        <div>
+                            <h4 class="font-bold text-lg">John Doe</h4>
+                            <p class="text-secondary-500">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <p class="text-secondary-700 mb-4">
+                        "NexusCSS has completely changed how I build interfaces. The utility-first approach allows me to prototype designs incredibly fast without writing custom CSS."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm relative">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center text-white text-xl font-bold mr-4">AS</div>
+                        <div>
+                            <h4 class="font-bold text-lg">Alex Smith</h4>
+                            <p class="text-secondary-500">UI/UX Designer</p>
+                        </div>
+                    </div>
+                    <p class="text-secondary-700 mb-4">
+                        "The design system in NexusCSS is incredibly well thought out. The consistent spacing and typography scales make my designs look polished with minimal effort."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-sm relative">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-xl font-bold mr-4">MJ</div>
+                        <div>
+                            <h4 class="font-bold text-lg">Maria Johnson</h4>
+                            <p class="text-secondary-500">Fullstack Developer</p>
+                        </div>
+                    </div>
+                    <p class="text-secondary-700 mb-4">
+                        "I've tried many CSS frameworks, but NexusCSS strikes the perfect balance between flexibility and structure. It's now my go-to for all projects."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="pricing" class="demo-section bg-white"><!-- Pricing Section -->
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-secondary-900">Simple Pricing</h2>
+                <p class="text-xl text-secondary-600 max-w-2xl mx-auto">
+                    Choose the plan that works best for you and your team.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="pricing-card bg-white p-8 rounded-xl border border-secondary-200 shadow-md">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Free</h3>
+                        <p class="text-secondary-600">For personal projects</p>
+                    </div>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-bold">$0</span>
+                        <span class="text-secondary-600">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Basic utility classes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Responsive design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Community support</span>
+                        </li>
+                        <li class="flex items-center text-secondary-400">
+                            <i class="fas fa-times mr-3"></i>
+                            <span>Advanced components</span>
+                        </li>
+                        <li class="flex items-center text-secondary-400">
+                            <i class="fas fa-times mr-3"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="btn btn-outline w-full">Get Started</button>
+                </div>
+                <div class="pricing-card bg-gradient-primary p-8 rounded-xl text-white shadow-xl relative">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">POPULAR</div><!-- Continue from the cut-off point -->
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                        <p class="text-primary-100">For growing teams</p>
+                    </div>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-bold">$12</span>
+                        <span class="text-primary-200">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-white mr-3"></i>
+                            <span>Basic utility classes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-white mr-3"></i>
+                            <span>Responsive design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-white mr-3"></i>
+                            <span>Community support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-white mr-3"></i>
+                            <span>Advanced components</span>
+                        </li>
+                        <li class="flex items-center text-secondary-200">
+                            <i class="fas fa-times mr-3"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="btn bg-white text-primary-600 hover:bg-secondary-100 w-full">Get Started</button>
+                </div>
+                <div class="pricing-card bg-white p-8 rounded-xl border border-secondary-200 shadow-md">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                        <p class="text-secondary-600">For large organizations</p>
+                    </div>
+                    <div class="text-center mb-8">
+                        <span class="text-4xl font-bold">$99</span>
+                        <span class="text-secondary-600">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Basic utility classes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Responsive design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Community support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Advanced components</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Custom components</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Dedicated account manager</span>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary w-full">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="demo-section bg-secondary-100"><!-- Contact Section -->
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-secondary-900">Contact Us</h2>
+                <p class="text-xl text-secondary-600 max-w-2xl mx-auto">
+                    Have questions? Get in touch with our team.
+                </p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Send us a message</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block mb-1 font-medium">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-1 font-medium">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="your.email@example.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block mb-1 font-medium">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Your message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-full">Send Message</button>
+                        </form>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Address</h4>
+                                    <p class="text-secondary-600">123 Design Street, Creative City, 12345</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt text-primary-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Phone</h4>
+                                    <p class="text-secondary-600">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope text-primary-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-secondary-600">support@nexuscss.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-primary-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Working Hours</h4>
+                                    <p class="text-secondary-600">Monday - Friday: 9AM - 5PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-3">Follow Us</h4>
+                            <div class="flex space-x-3">
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-secondary-900 text-white py-16"><!-- Footer -->
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-6">NexusCSS</h3>
+                    <p class="text-secondary-400 mb-6">
+                        A modern utility-first CSS framework for building responsive and accessible web applications.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon bg-secondary-700 hover:bg-primary-500">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-secondary-700 hover:bg-primary-500">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-secondary-700 hover:bg-primary-500">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-secondary-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#features" class="text-secondary-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#testimonials" class="text-secondary-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#pricing" class="text-secondary-400 hover:text-white transition">Pricing</a></li>
+                        <li><a href="#contact" class="text-secondary-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-secondary-400 hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="text-secondary-400 hover:text-white transition">Tutorials</a></li>
+                        <li><a href="#" class="text-secondary-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-secondary-400 hover:text-white transition">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Subscribe</h4>
+                    <p class="text-secondary-400 mb-4">
+                        Subscribe to our newsletter for the latest updates.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-secondary-800 text-white">
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-r-lg font-medium transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-secondary-800 mt-12 pt-8 text-center text-secondary-400">
+                <p>&copy; 2023 NexusCSS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {//<!-- Mobile Menu Script -->
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
