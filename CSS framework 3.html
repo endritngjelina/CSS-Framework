@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexiCSS - Professional CSS Framework</title>
+    <style>
+        :root {/* FlexiCSS Framework - Core System */
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --surface: #ffffff;
+            --on-surface: #1f2937;
+            --surface-variant: #f3f4f6;
+            --outline: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --border-radius: 0.375rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--on-surface);
+            background: var(--surface);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }/* Container System */
+        .container-sm { max-width: 640px; margin: 0 auto; padding: 0 1rem; }
+        .container-md { max-width: 768px; margin: 0 auto; padding: 0 1rem; }
+        .container-lg { max-width: 1024px; margin: 0 auto; padding: 0 1rem; }
+        .container-xl { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        .container-fluid { width: 100%; padding: 0 1rem; }
+        .flex { display: flex; }/* Flexbox Grid System */
+        .inline-flex { display: inline-flex; }
+        .flex-row { flex-direction: row; }
+        .flex-col { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-nowrap { flex-wrap: nowrap; }
+        .items-start { align-items: flex-start; }
+        .items-center { align-items: center; }
+        .items-end { align-items: flex-end; }
+        .items-stretch { align-items: stretch; }
+        .justify-start { justify-content: flex-start; }
+        .justify-center { justify-content: center; }
+        .justify-end { justify-content: flex-end; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .justify-evenly { justify-content: space-evenly; }
+        .flex-1 { flex: 1; }
+        .flex-auto { flex: auto; }
+        .flex-none { flex: none; }
+        .grow { flex-grow: 1; }
+        .shrink { flex-shrink: 1; }
+        .gap-1 { gap: 0.25rem; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        .grid { display: grid; }/* Grid System */
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+        .grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+        .col-span-1 { grid-column: span 1; }
+        .col-span-2 { grid-column: span 2; }
+        .col-span-3 { grid-column: span 3; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-6 { grid-column: span 6; }
+        .col-span-12 { grid-column: span 12; }
+        .m-0 { margin: 0; }/* Spacing System */
+        .m-1 { margin: 0.25rem; }
+        .m-2 { margin: 0.5rem; }
+        .m-3 { margin: 0.75rem; }
+        .m-4 { margin: 1rem; }
+        .m-6 { margin: 1.5rem; }
+        .m-8 { margin: 2rem; }
+        .m-12 { margin: 3rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .ml-4 { margin-left: 1rem; }
+        .mr-4 { margin-right: 1rem; }
+        .my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+        .mx-4 { margin-left: 1rem; margin-right: 1rem; }
+        .p-0 { padding: 0; }
+        .p-1 { padding: 0.25rem; }
+        .p-2 { padding: 0.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .p-12 { padding: 3rem; }
+        .pt-4 { padding-top: 1rem; }
+        .pb-4 { padding-bottom: 1rem; }
+        .pl-4 { padding-left: 1rem; }
+        .pr-4 { padding-right: 1rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }/* Typography System */
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-base { font-size: 1rem; line-height: 1.5rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+        .text-5xl { font-size: 3rem; line-height: 1; }
+        .font-thin { font-weight: 100; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-justify { text-align: justify; }
+        .leading-tight { line-height: 1.25; }
+        .leading-normal { line-height: 1.5; }
+        .leading-relaxed { line-height: 1.625; }
+        .text-primary { color: var(--primary); } /* Color System */
+        .text-secondary { color: var(--secondary); }
+        .text-success { color: var(--success); }
+        .text-warning { color: var(--warning); }
+        .text-error { color: var(--error); }
+        .text-gray-600 { color: #6b7280; }
+        .text-gray-800 { color: #1f2937; }
+        .text-white { color: #ffffff; }
+        .bg-primary { background-color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .bg-success { background-color: var(--success); }
+        .bg-warning { background-color: var(--warning); }
+        .bg-error { background-color: var(--error); }
+        .bg-white { background-color: #ffffff; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        .bg-gray-100 { background-color: #f3f4f6; }
+        .bg-gray-200 { background-color: #e5e7eb; }
+        .bg-gradient-primary { background: var(--gradient-primary); }
+        .bg-gradient-secondary { background: var(--gradient-secondary); }
+        .card {/* Component Classes */
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: 0 1px 3px var(--shadow);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        .card:hover {
+            box-shadow: 0 4px 6px var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before {left: 100%;}
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        .input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--outline);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--surface);
+        }
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .badge {
+            display: inline-flex;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 9999px;
+            background: var(--surface-variant);
+            color: var(--on-surface);
+        }
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+        .progress {
+            width: 100%;
+            height: 0.5rem;
+            background: var(--surface-variant);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .w-full { width: 100%; }/* Utility Classes */
+        .w-1\/2 { width: 50%; }
+        .w-1\/3 { width: 33.333333%; }
+        .w-2\/3 { width: 66.666667%; }
+        .w-1\/4 { width: 25%; }
+        .w-3\/4 { width: 75%; }
+        .h-full { height: 100%; }
+        .h-screen { height: 100vh; }
+        .min-h-screen { min-height: 100vh; }
+        .rounded { border-radius: var(--border-radius); }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-full { border-radius: 9999px; }
+        .shadow { box-shadow: 0 1px 3px var(--shadow); }
+        .shadow-md { box-shadow: 0 4px 6px var(--shadow); }
+        .shadow-lg { box-shadow: 0 10px 15px var(--shadow-lg); }
+        .shadow-xl { box-shadow: 0 20px 25px var(--shadow-lg); }
+        .border { border: 1px solid var(--outline); }
+        .border-2 { border: 2px solid var(--outline); }
+        .border-primary { border-color: var(--primary); }
+        .border-secondary { border-color: var(--secondary); }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-75 { opacity: 0.75; }
+        .opacity-90 { opacity: 0.9; }
+        .transition { transition: var(--transition); }
+        .transform { transform: translateZ(0); }
+        .hover\:scale-105:hover { transform: scale(1.05); }
+        .hover\:rotate-3:hover { transform: rotate(3deg); }
+        .cursor-pointer { cursor: pointer; }
+        .cursor-not-allowed { cursor: not-allowed; }
+        .select-none { user-select: none; }
+        .pointer-events-none { pointer-events: none; }
+        .overflow-hidden { overflow: hidden; }
+        .overflow-scroll { overflow: scroll; }
+        .overflow-auto { overflow: auto; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+        .sticky { position: sticky; }
+        .top-0 { top: 0; }
+        .right-0 { right: 0; }
+        .bottom-0 { bottom: 0; }
+        .left-0 { left: 0; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        .z-30 { z-index: 30; }
+        .z-40 { z-index: 40; }
+        .z-50 { z-index: 50; }
+        .block { display: block; }
+        .inline-block { display: inline-block; }
+        .inline { display: inline; }
+        .hidden { display: none; }
+        @media (min-width: 640px) { /* Responsive Design */
+            .sm\:flex { display: flex; }
+            .sm\:grid { display: grid; }
+            .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+            .sm\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+            .sm\:p-6 { padding: 1.5rem; }
+        }
+        @media (min-width: 768px) {
+            .md\:flex { display: flex; }
+            .md\:grid { display: grid; }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+            .md\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+            .md\:p-8 { padding: 2rem; }
+        }
+        @media (min-width: 1024px) {
+            .lg\:flex { display: flex; }
+            .lg\:grid { display: grid; }
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+            .lg\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+            .lg\:p-12 { padding: 3rem; }
+        }
+        @media (prefers-color-scheme: dark) {/* Dark Mode Support */
+            :root {
+                --surface: #1f2937;
+                --on-surface: #f9fafb;
+                --surface-variant: #374151;
+                --outline: #4b5563;
+                --shadow: rgba(0, 0, 0, 0.3);
+                --shadow-lg: rgba(0, 0, 0, 0.4);
+            }
+        }
+        .animate-pulse {animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;}/* Animation Classes */
+        .animate-bounce {animation: bounce 1s infinite;}
+        .animate-spin {animation: spin 1s linear infinite;}
+        .animate-fade-in {animation: fadeIn 0.5s ease-in-out;}
+        .animate-slide-up {animation: slideUp 0.5s ease-out;}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+            50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+        @keyframes spin {to { transform: rotate(360deg); }}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .demo-section {/* Demo Styles */
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--surface-variant);
+            border-radius: var(--border-radius);
+        }
+        .demo-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: var(--transition);
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--shadow-lg);
+        }
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .interactive-demo {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px var(--shadow);
+            margin: 1rem 0;
+        }
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .color-swatch {
+            height: 80px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: end;
+            padding: 0.5rem;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .nav-demo {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px var(--shadow);
+            margin: 1rem 0;
+        }
+        .nav-demo ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-demo a {
+            text-decoration: none;
+            color: var(--on-surface);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        .nav-demo a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .will-change-transform { will-change: transform; }/* Performance Optimizations */
+        .will-change-opacity { will-change: opacity; }
+        .backface-hidden { backface-visibility: hidden; }
+        .transform-gpu { transform: translate3d(0, 0, 0); }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <div class="container">
+            <h1 class="text-5xl font-bold mb-4 animate-fade-in">FlexiCSS Framework</h1>
+            <p class="text-xl opacity-90 animate-slide-up">A modern, utility-first CSS framework built for enterprise applications</p>
+            <div class="demo-controls mt-6">
+                <button class="btn btn-primary btn-lg" onclick="demonstrateFeatures()">
+                    🚀 Explore Features
+                </button>
+                <button class="btn btn-outline btn-lg" onclick="toggleTheme()">
+                    🌙 Toggle Theme
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="demo-section"><!-- Framework Overview -->
+            <h2 class="text-3xl font-bold mb-6 text-center">Framework Architecture</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="text-gray-600">Utility Classes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="text-gray-600">Component Types</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="text-gray-600">Breakpoints</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="text-gray-600">Responsive</div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Color System -->
+            <h2 class="text-3xl font-bold mb-6">Design System</h2>
+            <h3 class="text-xl font-semibold mb-4">Color Palette</h3>
+            <div class="color-palette">
+                <div class="color-swatch bg-primary">Primary</div>
+                <div class="color-swatch bg-secondary">Secondary</div>
+                <div class="color-swatch bg-success">Success</div>
+                <div class="color-swatch bg-warning">Warning</div>
+                <div class="color-swatch bg-error">Error</div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Grid System Demo -->
+            <h2 class="text-3xl font-bold mb-6">Responsive Grid System</h2>
+            <p class="text-lg mb-4">Flexible 12-column grid with breakpoint-specific classes</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-primary text-white p-4 rounded text-center">Col 1</div>
+                <div class="bg-secondary text-white p-4 rounded text-center">Col 2</div>
+                <div class="bg-success text-white p-4 rounded text-center">Col 3</div>
+                <div class="bg-warning text-white p-4 rounded text-center">Col 4</div>
+            </div>
+            <div class="code-block">
+&lt;div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"&gt;
+    &lt;div class="bg-primary text-white p-4 rounded"&gt;Responsive Column&lt;/div&gt;
+    &lt;!-- More columns --&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+        <div class="demo-section"><!-- Component Showcase -->
+            <h2 class="text-3xl font-bold mb-6">Component Library</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">Interactive Buttons</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-secondary">Secondary</button>
+                        <button class="btn btn-outline">Outline</button>
+                        <button class="btn btn-primary btn-sm">Small</button>
+                        <button class="btn btn-primary btn-lg">Large</button>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">Form Controls</h3>
+                    <div class="space-y-3">
+                        <input type="text" class="input" placeholder="Enter text...">
+                        <input type="email" class="input" placeholder="Email address">
+                        <select class="input">
+                            <option>Select option</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">Badges & Labels</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Default</span>
+                        <span class="badge badge-primary">Primary</span>
+                        <span class="badge badge-success">Success</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">Progress Bars</h3>
+                    <div class="space-y-3">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Flexbox Demo -->
+            <h2 class="text-3xl font-bold mb-6">Flexbox Utilities</h2>
+            <p class="text-lg mb-4">Comprehensive flexbox utilities for modern layouts</p>
+            <div class="interactive-demo">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="badge badge-primary">flex</span>
+                    <span class="badge">justify-between</span>
+                    <span class="badge">items-center</span>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex-1 bg-gray-100 p-4 rounded">Flex 1</div>
+                    <div class="flex-1 bg-gray-100 p-4 rounded">Flex 1</div>
+                    <div class="flex-none bg-primary text-white p-4 rounded">Fixed Width</div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Typography System -->
+            <h2 class="text-3xl font-bold mb-6">Typography Scale</h2>
+            <div class="space-y-4">
+                <div class="text-5xl font-bold">Heading 1 - 5xl</div>
+                <div class="text-4xl font-bold">Heading 2 - 4xl</div>
+                <div class="text-3xl font-bold">Heading 3 - 3xl</div>
+                <div class="text-2xl font-semibold">Heading 4 - 2xl</div>
+                <div class="text-xl font-semibold">Heading 5 - xl</div>
+                <div class="text-lg font-medium">Heading 6 - lg</div>
+                <div class="text-base">Body text - base size with optimal readability</div>
+                <div class="text-sm text-gray-600">Small text - sm size for captions</div>
+                <div class="text-xs text-gray-600">Extra small - xs size for labels</div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Advanced Features -->
+            <h2 class="text-3xl font-bold mb-6">Advanced Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">🎨 Gradient Backgrounds</h3>
+                    <div class="bg-gradient-primary text-white p-4 rounded mb-2">Primary Gradient</div>
+                    <div class="bg-gradient-secondary text-white p-4 rounded">Secondary Gradient</div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">✨ Animations</h3>
+                    <div class="flex gap-4">
+                        <div class="animate-pulse bg-primary text-white p-2 rounded">Pulse</div>
+                        <div class="animate-bounce bg-secondary text-white p-2 rounded">Bounce</div>
+                        <div class="animate-spin bg-success text-white p-2 rounded">Spin</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">📱 Responsive Design</h3>
+                    <div class="text-sm bg-gray-100 p-3 rounded">
+                        <div class="block sm:hidden">📱 Mobile View</div>
+                        <div class="hidden sm:block md:hidden">📱 Tablet View</div>
+                        <div class="hidden md:block lg:hidden">💻 Desktop View</div>
+                        <div class="hidden lg:block">🖥️ Large Screen</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4">🌙 Dark Mode Ready</h3>
+                    <p class="text-sm text-gray-600">Automatic dark mode support using CSS custom properties and media queries</p>
+                    <div class="mt-2 p-3 bg-gray-100 rounded text-sm">
+                        @media (prefers-color-scheme: dark)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Performance Features -->
+            <h2 class="text-3xl font-bold mb-6">Performance Optimizations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">🚀 GPU Acceleration</h3>
+                    <p class="text-gray-600 mb-3">Hardware-accelerated transforms and animations</p>
+                    <div class="code-block">
+.transform-gpu { transform: translate3d(0,0,0); }
+.will-change-transform { will-change: transform; }
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">📦 Modular Architecture</h3>
+                    <p class="text-gray-600 mb-3">Tree-shakeable utility classes for optimal bundle size</p>
+                    <div class="code-block">
+/* Only include what you use */
+@import 'flexi/base';
+@import 'flexi/components';
+@import 'flexi/utilities';
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Interactive Demo -->
+            <h2 class="text-3xl font-bold mb-6">Interactive Playground</h2>
+            <div class="interactive-demo">
+                <div class="mb-4">
+                    <label class="block font-semibold mb-2">Customize This Card:</label>
+                    <div class="demo-controls">
+                        <button class="btn btn-sm btn-outline" onclick="toggleClass('demo-card', 'shadow-xl')">Toggle Shadow</button>
+                        <button class="btn btn-sm btn-outline" onclick="toggleClass('demo-card', 'transform hover:scale-105')">Toggle Hover Scale</button>
+                        <button class="btn btn-sm btn-outline" onclick="toggleClass('demo-card', 'bg-gradient-primary')">Toggle Gradient</button>
+                        <button class="btn btn-sm btn-outline" onclick="toggleClass('demo-card', 'animate-pulse')">Toggle Pulse</button>
+                    </div>
+                </div>
+                <div id="demo-card" class="card transition">
+                    <h3 class="text-xl font-semibold mb-2">Interactive Demo Card</h3>
+                    <p class="text-gray-600">This card demonstrates real-time class manipulation using FlexiCSS utilities. Try the buttons above to see the framework in action!</p>
+                    <div class="mt-4">
+                        <span class="badge badge-primary">Utility-First</span>
+                        <span class="badge badge-success">Responsive</span>
+                        <span class="badge">Modern</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Navigation Demo -->
+            <h2 class="text-3xl font-bold mb-6">Navigation Components</h2>
+            <div class="nav-demo">
+                <nav class="flex justify-between items-center">
+                    <div class="font-bold text-xl">FlexiCSS</div>
+                    <ul class="flex gap-6">
+                        <li><a href="#" class="hover:text-primary">Home</a></li>
+                        <li><a href="#" class="hover:text-primary">Documentation</a></li>
+                        <li><a href="#" class="hover:text-primary">Components</a></li>
+                        <li><a href="#" class="hover:text-primary">Examples</a></li>
+                    </ul>
+                    <button class="btn btn-primary btn-sm">Get Started</button>
+                </nav>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Code Examples -->
+            <h2 class="text-3xl font-bold mb-6">Framework Usage</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Basic Card Component</h3>
+                    <div class="code-block">
+&lt;div class="card hover:shadow-lg transition"&gt;
+    &lt;h3 class="text-xl font-semibold mb-2"&gt;Card Title&lt;/h3&gt;
+    &lt;p class="text-gray-600"&gt;Card content goes here&lt;/p&gt;
+    &lt;button class="btn btn-primary mt-4"&gt;Action&lt;/button&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Responsive Layout</h3>
+                    <div class="code-block">
+&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+    &lt;div class="col-span-1 md:col-span-2"&gt;Main Content&lt;/div&gt;
+    &lt;div class="col-span-1"&gt;Sidebar&lt;/div&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section"><!-- Build System Demo -->
+            <h2 class="text-3xl font-bold mb-6">Build System Integration</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-4">PostCSS Configuration</h3>
+                <p class="text-gray-600 mb-4">FlexiCSS includes a powerful build system for generating custom utility classes</p>
+                <div class="code-block">
+// flexi.config.js
+module.exports = {
+    content: ['./src/**/*.{html,js,vue,react}'],
+    theme: {
+        extend: {
+            colors: {
+                brand: {
+                    primary: '#3b82f6',
+                    secondary: '#8b5cf6'
+                }
+            },
+            spacing: {
+                '18': '4.5rem',
+                '88': '22rem'
+            }
+        }
+    },
+    plugins: [
+        require('./plugins/animations'),
+        require('./plugins/components')
+    ]
+}
+                </div>
+            </div>
+        </div>
+        <div class="demo-section text-center"><!-- Footer -->
+            <h2 class="text-3xl font-bold mb-6">Ready to Build Amazing UIs?</h2>
+            <p class="text-lg text-gray-600 mb-6">FlexiCSS provides everything you need for modern web development</p>
+            <div class="flex justify-center gap-4">
+                <button class="btn btn-primary btn-lg">Download Framework</button>
+                <button class="btn btn-outline btn-lg">View Documentation</button>
+            </div>
+            <div class="mt-8 text-sm text-gray-600">
+                <p>Built with ❤️ for modern web development</p>
+                <p>© 2025 FlexiCSS Framework - Enterprise Ready</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleClass(elementId, className) {// Interactive Demo Functions
+            const element = document.getElementById(elementId);
+            const classes = className.split(' ');
+            classes.forEach(cls => {
+                element.classList.toggle(cls);
+            });
+        }
+        function demonstrateFeatures() {
+            const cards = document.querySelectorAll('.card, .feature-card'); // Animate all cards
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'slideUp 0.5s ease-out';
+                }, index * 100);
+            });
+            showNotification('🚀 Features demonstrated! Check out the animated cards.');// Show notification
+        }
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            if (body.classList.contains('dark-theme')) {
+                document.documentElement.style.setProperty('--surface', '#1f2937');
+                document.documentElement.style.setProperty('--on-surface', '#f9fafb');
+                document.documentElement.style.setProperty('--surface-variant', '#374151');
+                document.documentElement.style.setProperty('--outline', '#4b5563');
+                showNotification('🌙 Dark theme activated');
+            } 
+            else {
+                document.documentElement.style.setProperty('--surface', '#ffffff');
+                document.documentElement.style.setProperty('--on-surface', '#1f2937');
+                document.documentElement.style.setProperty('--surface-variant', '#f3f4f6');
+                document.documentElement.style.setProperty('--outline', '#e5e7eb');
+                showNotification('☀️ Light theme activated');
+            }
+        }
+        function showNotification(message) {
+            const notification = document.createElement('div');// Create notification element
+            notification.className = 'fixed top-4 right-4 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-up';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {// Remove after 3 seconds
+                notification.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+        function measurePerformance() {// Performance monitoring
+            if (performance.mark) {
+                performance.mark('framework-start');
+                setTimeout(() => {// Simulate framework operations
+                    performance.mark('framework-end');
+                    performance.measure('framework-load', 'framework-start', 'framework-end');
+                    const measure = performance.getEntriesByName('framework-load')[0];
+                    console.log(`Framework loaded in ${measure.duration.toFixed(2)}ms`);
+                }, 100);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {// Initialize framework
+            measurePerformance();
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => { //smooth scrolling
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            const observer = new IntersectionObserver((entries) => {// Add intersection observer for animations
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('animate-fade-in');
+                });
+            });
+            document.querySelectorAll('.demo-section').forEach(section => {
+                observer.observe(section);
+            });
+            document.querySelectorAll('.input').forEach(input => {//form validation
+                input.addEventListener('invalid', function(e) {
+                    e.target.classList.add('border-error');
+                });
+                input.addEventListener('input', function(e) {
+                    e.target.classList.remove('border-error');
+                });
+            });
+            console.log('🚀 FlexiCSS Framework initialized successfully!');
+        });
+        function updateCSSProperty(property, value) {// CSS custom properties manipulation
+            document.documentElement.style.setProperty(property, value);
+        }
+        function getBreakpoint() {// Utility function for responsive breakpoints
+            const width = window.innerWidth;
+            if (width < 640) return 'mobile';
+            if (width < 768) return 'tablet';
+            if (width < 1024) return 'desktop';
+            return 'large';
+        }
+        window.addEventListener('resize', function() {// Add resize listener for responsive demo
+            const breakpoint = getBreakpoint();
+            document.body.setAttribute('data-breakpoint', breakpoint);
+        });
+        document.body.setAttribute('data-breakpoint', getBreakpoint());// Initialize breakpoint
+    </script>
+</body>
+</html>
